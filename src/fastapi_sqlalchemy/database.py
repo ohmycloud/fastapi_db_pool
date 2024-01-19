@@ -4,13 +4,14 @@ from sqlalchemy.orm import sessionmaker
 from settings import settings
 
 # SQLALCHEMY_DATABASE_URL = f'postgresql://{postgres}:{root}@{127.0.0.1}:{5432}/{postgres}'
-print("settings.database_username", settings.database_username)
-print("settings.database_password", settings.database_password)
-print("settings.database_hostname", settings.database_hostname)
-print("settings.database_port", settings.database_port)
-print("settings.database_name", settings.database_name)
+print("settings.hostname", settings.hostname)
+print("settings.port", settings.port)
+print("settings.db_name", settings.db_name)
+print("settings.db_username", settings.db_username)
+print("settings.db_password", settings.db_password)
 
-SQLALCHEMY_DATABASE_URL = f'postgresql://{settings.database_username}:{settings.database_password}@{settings.database_hostname}:{settings.database_port}/{settings.database_name}'
+
+SQLALCHEMY_DATABASE_URL = f'postgresql://{settings.db_username}:{settings.db_password}@{settings.hostname}:{settings.port}/{settings.db_name}'
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
