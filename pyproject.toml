@@ -1,0 +1,35 @@
+[project]
+name = "fastapi-sqlalchemy"
+version = "0.1.0"
+description = "FastAPI 数据库连接池"
+authors = [
+    { name = "ohmycloud", email = "ohmycloudy@gmail.com" }
+]
+dependencies = [
+    "fastapi>=0.109.0",
+    "pydantic[email]>=2.5.3",
+    "SQLAlchemy>=2.0.25",
+    "psycopg2-binary>=2.9.9",
+    "alembic>=1.13.1",
+    "asyncpg>=0.29.0",
+    "uvicorn>=0.26.0",
+    "pydantic-settings>=2.1.0",
+]
+readme = "README.md"
+requires-python = ">= 3.8"
+
+[project.scripts]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.rye]
+managed = true
+dev-dependencies = []
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/fastapi_sqlalchemy"]
