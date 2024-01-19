@@ -21,3 +21,4 @@ CREATE TABLE public.user
 );
 ```
 
+连接池的创建参考：https://github.com/tiangolo/fastapi/discussions/9097
