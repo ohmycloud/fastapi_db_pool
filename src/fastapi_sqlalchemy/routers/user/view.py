@@ -2,7 +2,7 @@ from fastapi import status, HTTPException, APIRouter, Depends
 import asyncpg
 from .serializer import UserBase
 from .models import User
-from fastapi_sqlalchemy.connection_pool import get_pool
+from fastapi_sqlalchemy.connection_pool import DataBasePool
 
 
 router = APIRouter(
@@ -13,7 +13,7 @@ router = APIRouter(
 
 # fetch data from postgresql
 @router.get("/fetch", status_code=status.HTTP_201_CREATED)
-async def get_user(db_pool: asyncpg.Pool = Depends(get_pool)):
+async def get_user(db_pool: asyncpg.Pool = Depends(DataBasePool.get_pool)):
     """Handle incoming requests."""
     async with db_pool.acquire() as connection:
         try:
@@ -26,7 +26,7 @@ async def get_user(db_pool: asyncpg.Pool = Depends(get_pool)):
 
 # insert data into postgres
 @router.post("/create", status_code=status.HTTP_201_CREATED)
-async def create_user(user: UserBase, db_pool: asyncpg.Pool = Depends(get_pool)):
+async def create_user(user: UserBase, db_pool: asyncpg.Pool = Depends(DataBasePool.get_pool)):
     db_user = User(**dict(user))
     query = """INSERT INTO public.user (id, fname, lname, email, password) VALUES 
        ({}, '{}', '{}', '{}', '{}')""".format(db_user.id,

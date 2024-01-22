@@ -1,20 +1,11 @@
 from fastapi import FastAPI
 from routers.user import view as userview
-from connection_pool import get_pool
 from fastapi.middleware.cors import CORSMiddleware
-from contextlib import asynccontextmanager
 import uvicorn
 
 
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    print('init a postgres pool')
-    yield
-    await get_pool()
-
 # Fast API
-app = FastAPI(lifespan=lifespan)
-
+app = FastAPI()
 origins = ["*"]
 # CORS
 app.add_middleware(
